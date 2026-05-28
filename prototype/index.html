@@ -10,17 +10,17 @@
     <main class="app-shell">
       <aside class="nav-rail" aria-label="原型导航">
         <div class="brand-block">
-          <div class="brand-mark">ES</div>
+          <div class="brand-mark">CC</div>
           <div>
             <strong>CaptionCue</strong>
-            <span>浏览器插件原型</span>
+            <span>幕听浏览器插件原型</span>
           </div>
         </div>
 
         <nav class="nav-list" aria-label="原型页面">
           <button class="nav-item active" data-view="workspace" type="button">
             <span class="nav-icon">[1]</span>
-            学习工作台
+            抖音学习模式
           </button>
           <button class="nav-item" data-view="flow" type="button">
             <span class="nav-icon">[2]</span>
@@ -51,169 +51,230 @@
       <section class="content-area">
         <header class="topbar">
           <div>
-            <p class="eyebrow">Chrome 插件 / 侧边栏原型</p>
-            <h1>按字幕句子听懂英语视频</h1>
+            <p class="eyebrow">Douyin Page / Learning Mode Prototype</p>
+            <h1>从抖音视频进入幕听学习模式</h1>
           </div>
           <div class="topbar-actions">
-            <button class="icon-button" type="button" title="检测当前页面">?</button>
-            <button class="primary-button" type="button">生成字幕</button>
+            <button class="icon-button" type="button" title="重置原型" id="reset-prototype">↺</button>
+            <button class="primary-button" type="button" id="top-enter-learning">进入学习模式</button>
           </div>
         </header>
 
         <section class="view active" id="workspace">
-          <div class="workspace-grid">
-            <section class="video-board" aria-label="视频页面模拟">
-              <div class="browser-frame">
-                <div class="browser-toolbar">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <div class="address">https://www.douyin.com/video/7369...</div>
-                </div>
-                <div class="mock-video">
-                  <div class="video-meta">
-                    <span class="site-badge">抖音</span>
-                    <span>已识别当前主视频</span>
-                  </div>
-                  <div class="video-center">
-                    <button class="play-button" type="button" aria-label="播放或暂停">▶</button>
-                    <p id="playback-state">00:18 / 01:02</p>
-                  </div>
-                  <div class="floating-caption">
-                    <span id="video-caption-text">I didn't realize how much I relied on subtitles.</span>
-                    <small id="video-caption-translation">我没意识到自己有多依赖字幕。</small>
+          <section class="douyin-entry-state" id="douyin-entry-state" aria-label="抖音视频页面入口状态">
+            <div class="douyin-page-frame">
+              <div class="douyin-video-shell">
+                <div class="douyin-video-stage">
+                  <div class="creator-badge">VolkaEnglish</div>
+                  <div class="douyin-video-copy">
+                    <span>Douyin video</span>
+                    <strong>打开抖音视频后，幕听图标出现在页面底部工具栏</strong>
                   </div>
                 </div>
-              </div>
-
-              <div class="player-controls">
-                <button type="button" title="上一句">上一句</button>
-                <button type="button" title="播放">播放</button>
-                <button type="button" title="下一句">下一句</button>
-                <button type="button" class="active">单句循环</button>
-                <label>
-                  速度
-                  <input type="range" min="0.5" max="1.5" step="0.1" value="1" />
-                </label>
-              </div>
-            </section>
-
-            <aside class="side-panel" aria-label="字幕学习面板">
-              <div class="panel-header">
-                <div>
-                  <p class="eyebrow">侧边栏</p>
-                  <h2>字幕学习</h2>
-                </div>
-                <span class="status-pill ready">已就绪</span>
-              </div>
-
-              <div class="segment-focus">
-                <span class="timecode" id="focus-time">00:17.400 - 00:20.100</span>
-                <div class="caption-mode-switch" aria-label="字幕显示模式">
-                  <button class="active" data-caption-mode="bilingual" type="button">中英双语</button>
-                  <button data-caption-mode="english" type="button">纯英文</button>
-                  <button data-caption-mode="chinese" type="button">纯中文</button>
-                </div>
-                <p id="focus-text">I didn't realize how much I relied on subtitles.</p>
-                <p id="focus-translation">我没意识到自己有多依赖字幕。</p>
-
-                <div class="word-detail-panel" id="word-detail-panel">
-                  <div class="word-detail-heading">
+                <div class="douyin-native-toolbar">
+                  <div class="toolbar-left">
+                    <button class="douyin-logo" type="button" aria-label="抖音">▶</button>
                     <div>
-                      <span class="detail-label">单词详情</span>
-                      <strong id="word-title">subtitles</strong>
+                      <strong>Learn English Naturally With This Easy Vlog</strong>
+                      <span>Comprehensible input video</span>
                     </div>
-                    <button class="sound-button" type="button" title="播放读音">▶</button>
                   </div>
-                  <div class="phonetic-row">
-                    <span id="word-phonetic">/sub-ty-tuhlz/</span>
-                    <span id="word-type">名词</span>
+                  <div class="toolbar-actions">
+                    <button type="button" title="收藏">☆</button>
+                    <button type="button" title="弹幕">▣</button>
+                    <button type="button" title="字幕">CC</button>
+                    <button class="captioncue-toolbar-button" id="captioncue-toolbar-button" type="button" title="打开幕听菜单">
+                      幕听
+                    </button>
                   </div>
-                  <p id="word-definition">视频中显示的文字，用来对应或翻译对白内容。</p>
-                  <p id="word-example">I relied on subtitles to understand every sentence.</p>
-                </div>
 
-                <div class="segment-actions">
-                  <button type="button">AI 讲解</button>
-                  <button type="button">标记难句</button>
-                  <button type="button">隐藏翻译</button>
+                  <div class="extension-menu" id="extension-menu" hidden>
+                    <div class="extension-menu-title">
+                      <div class="menu-title-left">
+                        <span class="mini-icon">CC</span>
+                        <strong>CaptionCue 幕听</strong>
+                        <span class="info-dot">i</span>
+                      </div>
+                      <button class="menu-toggle active" type="button" aria-label="启用幕听">
+                        <span></span>
+                      </button>
+                    </div>
+
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">⏱</span>
+                      <strong>临时开启</strong>
+                      <span class="setting-info">i</span>
+                      <em>Alt+C</em>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon ai">CC</span>
+                      <strong>AI 字幕</strong>
+                      <span class="setting-info">i</span>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">🌐</span>
+                      <strong>主字幕</strong>
+                      <em>English</em>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">中A</span>
+                      <strong>翻译字幕</strong>
+                      <em>中文</em>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">▣</span>
+                      <strong>AI 总结</strong>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">♡</span>
+                      <strong>收藏视频</strong>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">A↗</span>
+                      <strong>翻译引擎</strong>
+                      <em>DeepSeek</em>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">▤</span>
+                      <strong>字幕显示</strong>
+                      <em>双语字幕</em>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">⚙</span>
+                      <strong>字幕样式</strong>
+                      <span class="chevron">›</span>
+                    </button>
+                    <button class="menu-setting-row" type="button">
+                      <span class="setting-icon">⚙</span>
+                      <strong>更多功能</strong>
+                      <span class="chevron">›</span>
+                    </button>
+
+                    <button class="learning-menu-button" id="enter-learning-mode" type="button">
+                      <span class="learning-icon">◇</span>
+                      <strong>学习模式</strong>
+                      <span class="setting-info">i</span>
+                    </button>
+                  </div>
                 </div>
               </div>
+            </div>
+          </section>
 
-              <div class="caption-list" id="caption-list" aria-label="字幕列表">
-                <button
-                  class="caption-row"
-                  data-time="00:11.200 - 00:14.600"
-                  data-text="The video has no readable captions on the page."
-                  data-translation="这个页面上没有可读取的字幕。"
-                  type="button"
-                >
-                  <span>00:11</span>
-                  <strong>The video has no readable captions on the page.</strong>
-                  <em>这个页面上没有可读取的字幕。</em>
-                </button>
-                <button
-                  class="caption-row active"
-                  data-time="00:17.400 - 00:20.100"
-                  data-text="I didn't realize how much I relied on subtitles."
-                  data-translation="我没意识到自己有多依赖字幕。"
-                  type="button"
-                >
-                  <span>00:17</span>
-                  <strong>I didn't realize how much I relied on subtitles.</strong>
-                  <em>我没意识到自己有多依赖字幕。</em>
-                </button>
-                <button
-                  class="caption-row"
-                  data-time="00:22.800 - 00:26.000"
-                  data-text="Now I can jump sentence by sentence."
-                  data-translation="现在我可以按句子跳转视频。"
-                  type="button"
-                >
-                  <span>00:22</span>
-                  <strong>Now I can jump sentence by sentence.</strong>
-                  <em>现在我可以按句子跳转视频。</em>
-                </button>
-                <button
-                  class="caption-row"
-                  data-time="00:31.100 - 00:35.300"
-                  data-text="DeepSeek helps polish the translation and notes."
-                  data-translation="DeepSeek 可以优化翻译和学习笔记。"
-                  type="button"
-                >
-                  <span>00:31</span>
-                  <strong>DeepSeek helps polish the translation and notes.</strong>
-                  <em>DeepSeek 可以优化翻译和学习笔记。</em>
-                </button>
-              </div>
-            </aside>
-          </div>
+          <section class="learning-mode-state" id="learning-mode-state" aria-label="学习模式布局" hidden>
+            <div class="learning-layout">
+              <section class="learning-main">
+                <div class="learning-video">
+                  <div class="video-watermark">VolkaEnglish</div>
+                  <div class="video-speaker-card">
+                    <span>Vlog / English Input</span>
+                    <strong>Today's video is going to be a little bit different.</strong>
+                  </div>
+                </div>
 
-          <section class="status-band" aria-label="任务状态">
-            <div>
-              <span class="status-dot done"></span>
-              <strong>视频识别</strong>
-              <small>DouyinAdapter 已选择当前主视频</small>
-            </div>
-            <div>
-              <span class="status-dot done"></span>
-              <strong>无字幕流程</strong>
-              <small>提取音频、AI 转写并生成 WebVTT</small>
-            </div>
-            <div>
-              <span class="status-dot running"></span>
-              <strong>AI 优化</strong>
-              <small>DeepSeek 处理翻译和学习讲解</small>
-            </div>
-            <div>
-              <span class="status-dot running"></span>
-              <strong>单词学习</strong>
-              <small>悬浮暂停视频，点击查看详情</small>
-            </div>
-            <div>
-              <span class="status-dot idle"></span>
-              <strong>学习缓存</strong>
-              <small>IndexedDB 保存字幕和单词详情</small>
+                <div class="realtime-caption">
+                  <span class="timecode" id="focus-time">00:04.000 - 00:06.300</span>
+                  <div class="caption-mode-switch" aria-label="字幕显示模式">
+                    <button class="active" data-caption-mode="bilingual" type="button">中英双语</button>
+                    <button data-caption-mode="english" type="button">纯英文</button>
+                    <button data-caption-mode="chinese" type="button">纯中文</button>
+                  </div>
+                  <p id="focus-text">Today's video is going to be a little bit different.</p>
+                  <p id="focus-translation">今天的视频会有点不同。</p>
+
+                  <div class="word-detail-panel" id="word-detail-panel">
+                    <div class="word-detail-heading">
+                      <div>
+                        <span class="detail-label">单词详情</span>
+                        <strong id="word-title">different</strong>
+                      </div>
+                      <button class="sound-button" type="button" title="播放读音">▶</button>
+                    </div>
+                    <div class="phonetic-row">
+                      <span id="word-phonetic">/dif-er-uhnt/</span>
+                      <span id="word-type">形容词</span>
+                    </div>
+                    <p id="word-definition">不同的；和之前的内容、风格或情况不一样。</p>
+                    <p id="word-example">Today's video is going to be a little bit different.</p>
+                  </div>
+                </div>
+
+                <div class="learning-controls">
+                  <div class="control-time">
+                    <span id="playback-state">00:04</span>
+                    <div class="control-progress"><span></span></div>
+                    <span>01:02</span>
+                  </div>
+                  <div class="control-buttons">
+                    <button type="button" title="上一句">上一句</button>
+                    <button class="play-button" type="button" aria-label="播放或暂停">▶</button>
+                    <button type="button" title="下一句">下一句</button>
+                    <button class="active" type="button">单句循环</button>
+                    <button type="button">收藏难句</button>
+                  </div>
+                </div>
+              </section>
+
+              <aside class="subtitle-sidebar" aria-label="所有字幕侧边栏">
+                <div class="subtitle-sidebar-header">
+                  <div>
+                    <p class="eyebrow">字幕列表</p>
+                    <h2>所有时间段字幕</h2>
+                  </div>
+                  <button class="icon-button" id="exit-learning-mode" type="button" title="退出学习模式">×</button>
+                </div>
+
+                <div class="caption-list" id="caption-list" aria-label="字幕列表">
+                  <button class="caption-row" data-time="00:00.000 - 00:03.700" data-text="Welcome back guys to another comprehensible input vlog." data-translation="欢迎大家回来，来到另一个易懂输入视频日志。" type="button">
+                    <span>00:00</span>
+                    <strong>Welcome back guys to another comprehensible input vlog.</strong>
+                    <em>欢迎大家回来，来到另一个易懂输入视频日志。</em>
+                  </button>
+                  <button class="caption-row active" data-time="00:04.000 - 00:06.300" data-text="Today's video is going to be a little bit different." data-translation="今天的视频会有点不同。" type="button">
+                    <span>00:04</span>
+                    <strong>Today's video is going to be a little bit different.</strong>
+                    <em>今天的视频会有点不同。</em>
+                  </button>
+                  <button class="caption-row" data-time="00:06.300 - 00:08.700" data-text="Because I'm going to be filming this like in my old style." data-translation="因为我要用以前的风格来拍这个视频。" type="button">
+                    <span>00:06</span>
+                    <strong>Because I'm going to be filming this like in my old style.</strong>
+                    <em>因为我要用以前的风格来拍这个视频。</em>
+                  </button>
+                  <button class="caption-row" data-time="00:10.100 - 00:12.900" data-text="Style from my first YouTube video ever." data-translation="就像我人生中第一个 YouTube 视频的风格。" type="button">
+                    <span>00:10</span>
+                    <strong>Style from my first YouTube video ever.</strong>
+                    <em>就像我人生中第一个 YouTube 视频的风格。</em>
+                  </button>
+                  <button class="caption-row" data-time="00:13.000 - 00:15.800" data-text="If you guys like this style and you want me to film more videos like this." data-translation="如果你们喜欢这种风格，也希望我拍更多这样的视频。" type="button">
+                    <span>00:13</span>
+                    <strong>If you guys like this style and you want me to film more videos like this.</strong>
+                    <em>如果你们喜欢这种风格，也希望我拍更多这样的视频。</em>
+                  </button>
+                  <button class="caption-row" data-time="00:16.000 - 00:18.400" data-text="Then let me know in the comments." data-translation="那就在评论区告诉我吧。" type="button">
+                    <span>00:16</span>
+                    <strong>Then let me know in the comments.</strong>
+                    <em>那就在评论区告诉我吧。</em>
+                  </button>
+                  <button class="caption-row" data-time="00:18.600 - 00:21.500" data-text="I'll be describing everything naturally in English." data-translation="我会用英语自然地描述一切。" type="button">
+                    <span>00:18</span>
+                    <strong>I'll be describing everything naturally in English.</strong>
+                    <em>我会用英语自然地描述一切。</em>
+                  </button>
+                  <button class="caption-row" data-time="00:21.700 - 00:24.500" data-text="You'll also learn useful phrases and vocabulary." data-translation="你还会学到有用的短语和词汇。" type="button">
+                    <span>00:21</span>
+                    <strong>You'll also learn useful phrases and vocabulary.</strong>
+                    <em>你还会学到有用的短语和词汇。</em>
+                  </button>
+                </div>
+              </aside>
             </div>
           </section>
         </section>
@@ -226,38 +287,28 @@
           <div class="flow-lane">
             <div class="flow-step">
               <span>1</span>
-              <strong>检测页面</strong>
-              <p>Content Script 扫描 video 元素，并监听 SPA 路由变化。</p>
+              <strong>识别抖音视频</strong>
+              <p>Content Script 在抖音页面选择当前主视频，并在底部工具栏注入幕听入口。</p>
             </div>
             <div class="flow-step">
               <span>2</span>
-              <strong>检测字幕</strong>
-              <p>优先读取原生字幕轨道；没有字幕时进入转写流程。</p>
+              <strong>打开菜单</strong>
+              <p>点击幕听图标后出现菜单弹窗，其中包含“学习模式”。</p>
             </div>
             <div class="flow-step">
               <span>3</span>
-              <strong>提取音频</strong>
-              <p>对可访问的媒体音频切片，切换视频时取消过期任务。</p>
+              <strong>切换布局</strong>
+              <p>进入学习模式后，左侧为视频、实时字幕和控制栏，右侧为完整字幕列表。</p>
             </div>
             <div class="flow-step">
               <span>4</span>
-              <strong>AI 转写</strong>
-              <p>语音模型返回文本、时间戳和置信度。</p>
+              <strong>字幕联动</strong>
+              <p>点击右侧任意字幕，视频跳转到该时间点并更新实时字幕。</p>
             </div>
             <div class="flow-step">
               <span>5</span>
-              <strong>应用字幕</strong>
-              <p>生成 CaptionSegment，并注入 WebVTT 字幕轨道。</p>
-            </div>
-            <div class="flow-step">
-              <span>6</span>
-              <strong>按句学习</strong>
-              <p>点击字幕跳转，支持单句循环，以及纯英文、纯中文、中英双语切换。</p>
-            </div>
-            <div class="flow-step">
-              <span>7</span>
-              <strong>按词学习</strong>
-              <p>悬浮单词暂停视频，点击单词查看音标、读音和释义。</p>
+              <strong>AI 辅助</strong>
+              <p>无字幕时提取音频转写，已有字幕时优化翻译、断句和学习讲解。</p>
             </div>
           </div>
         </section>
@@ -275,16 +326,14 @@
                 <li>优先选择正在播放的视频。</li>
                 <li>再按可见面积、视口中心距离和详情弹层优先级判断。</li>
                 <li>监听 MutationObserver、History API、loadedmetadata 和 play 事件。</li>
-                <li>视频稳定停留 1.5 到 3 秒后再启动转写任务。</li>
               </ul>
             </section>
             <section class="logic-panel">
-              <h3>风险与降级</h3>
+              <h3>入口与布局</h3>
               <ul class="check-list warning">
-                <li>不依赖抖音页面中的 class 名。</li>
-                <li>遇到 blob、MSE、跨域或 DRM 阻止音频提取时，展示明确错误提示。</li>
-                <li>MVP 阶段跳过直播、图文和广告视频。</li>
-                <li>用户快速切换视频时，取消尚未开始的任务。</li>
+                <li>在抖音视频底部工具栏注入幕听图标。</li>
+                <li>菜单弹窗暂保留扩展入口，学习模式作为核心操作。</li>
+                <li>学习模式不依赖抖音原始播放器布局，使用插件自己的沉浸式容器。</li>
               </ul>
             </section>
           </div>
@@ -316,34 +365,14 @@
                 语音转写模型
                 <input value="speech-to-text provider" />
               </label>
-              <label>
-                API Key 保存位置
-                <input value="chrome.storage.local 或自建代理" />
-              </label>
             </section>
 
             <section class="settings-panel">
               <h3>任务路由</h3>
-              <div class="route-row">
-                <span>音频转写</span>
-                <strong>语音识别模型</strong>
-              </div>
-              <div class="route-row">
-                <span>字幕断句</span>
-                <strong id="route-provider-1">DeepSeek</strong>
-              </div>
-              <div class="route-row">
-                <span>翻译优化</span>
-                <strong id="route-provider-2">DeepSeek</strong>
-              </div>
-              <div class="route-row">
-                <span>学习讲解</span>
-                <strong id="route-provider-3">DeepSeek</strong>
-              </div>
-              <div class="route-row">
-                <span>时间轴校对</span>
-                <strong>规则算法 + AI 辅助</strong>
-              </div>
+              <div class="route-row"><span>音频转写</span><strong>语音识别模型</strong></div>
+              <div class="route-row"><span>字幕断句</span><strong id="route-provider-1">DeepSeek</strong></div>
+              <div class="route-row"><span>翻译优化</span><strong id="route-provider-2">DeepSeek</strong></div>
+              <div class="route-row"><span>学习讲解</span><strong id="route-provider-3">DeepSeek</strong></div>
             </section>
           </div>
         </section>
@@ -354,34 +383,11 @@
             <h2>第一阶段交付范围</h2>
           </div>
           <div class="roadmap-grid">
-            <div class="roadmap-item complete">
-              <strong>视频识别</strong>
-              <p>Content Script 和 DouyinAdapter 定位当前主视频。</p>
-            </div>
-            <div class="roadmap-item complete">
-              <strong>无字幕生成</strong>
-              <p>提取音频、AI 转写，并格式化为 WebVTT。</p>
-            </div>
-            <div class="roadmap-item active">
-              <strong>字幕学习面板</strong>
-              <p>React 侧边栏展示纯英文、纯中文或中英双语字幕，并提供播放控制。</p>
-            </div>
-            <div class="roadmap-item">
-              <strong>Zustand 状态层</strong>
-              <p>拆分 video、caption、learning 和 aiTask 状态。</p>
-            </div>
-            <div class="roadmap-item">
-              <strong>AI 模型配置</strong>
-              <p>支持 DeepSeek 等文本模型，并单独配置语音模型。</p>
-            </div>
-            <div class="roadmap-item active">
-              <strong>单词悬浮学习</strong>
-              <p>悬浮暂停视频，点击查看音标、读音、释义和例句。</p>
-            </div>
-            <div class="roadmap-item">
-              <strong>本地缓存</strong>
-              <p>IndexedDB 保存字幕、AI 结果、单词详情和学习进度。</p>
-            </div>
+            <div class="roadmap-item complete"><strong>抖音入口</strong><p>在视频底部工具栏注入幕听图标和菜单弹窗。</p></div>
+            <div class="roadmap-item complete"><strong>学习模式布局</strong><p>左侧视频、实时字幕和控制栏，右侧完整字幕侧边栏。</p></div>
+            <div class="roadmap-item active"><strong>字幕联动</strong><p>点击字幕跳转视频，支持中英双语、纯英文、纯中文。</p></div>
+            <div class="roadmap-item"><strong>AI 转写</strong><p>无字幕时提取音频并生成 WebVTT 字幕。</p></div>
+            <div class="roadmap-item"><strong>单词学习</strong><p>悬浮暂停视频，点击显示音标、读音和释义。</p></div>
           </div>
         </section>
       </section>

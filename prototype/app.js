@@ -2,11 +2,19 @@ const navItems = document.querySelectorAll(".nav-item")
 const views = document.querySelectorAll(".view")
 const captionRows = document.querySelectorAll(".caption-row")
 const modeButtons = document.querySelectorAll("[data-caption-mode]")
+
+const entryState = document.querySelector("#douyin-entry-state")
+const learningState = document.querySelector("#learning-mode-state")
+const toolbarButton = document.querySelector("#captioncue-toolbar-button")
+const extensionMenu = document.querySelector("#extension-menu")
+const enterLearningButton = document.querySelector("#enter-learning-mode")
+const topEnterLearningButton = document.querySelector("#top-enter-learning")
+const exitLearningButton = document.querySelector("#exit-learning-mode")
+const resetButton = document.querySelector("#reset-prototype")
+
 const focusTime = document.querySelector("#focus-time")
 const focusText = document.querySelector("#focus-text")
 const focusTranslation = document.querySelector("#focus-translation")
-const videoCaptionText = document.querySelector("#video-caption-text")
-const videoCaptionTranslation = document.querySelector("#video-caption-translation")
 const playbackState = document.querySelector("#playback-state")
 const playButton = document.querySelector(".play-button")
 const wordPanel = document.querySelector("#word-detail-panel")
@@ -16,6 +24,7 @@ const wordType = document.querySelector("#word-type")
 const wordDefinition = document.querySelector("#word-definition")
 const wordExample = document.querySelector("#word-example")
 const soundButton = document.querySelector(".sound-button")
+
 const providerSelect = document.querySelector("#provider-select")
 const modelInput = document.querySelector("#model-input")
 const routeProviders = [
@@ -35,78 +44,60 @@ const providerDefaultModels = {
 }
 
 const wordDictionary = {
+  today: {
+    phonetic: "/tuh-day/",
+    type: "\u540d\u8bcd / \u526f\u8bcd",
+    definition: "\u4eca\u5929\uff1b\u5f53\u524d\u8fd9\u4e00\u5929\u3002",
+    example: "Today's video is going to be a little bit different."
+  },
   video: {
     phonetic: "/vid-ee-oh/",
-    type: "名词",
-    definition: "视频；一段可播放或流式传输的动态影像。",
-    example: "This video is useful for listening practice."
+    type: "\u540d\u8bcd",
+    definition: "\u89c6\u9891\uff1b\u4e00\u6bb5\u53ef\u64ad\u653e\u6216\u6d41\u5f0f\u4f20\u8f93\u7684\u52a8\u6001\u5f71\u50cf\u3002",
+    example: "Today's video is going to be a little bit different."
   },
-  readable: {
-    phonetic: "/ree-duh-buhl/",
-    type: "形容词",
-    definition: "可读的；容易阅读或识别的。",
-    example: "The page has no readable captions."
+  little: {
+    phonetic: "/lit-l/",
+    type: "\u5f62\u5bb9\u8bcd",
+    definition: "\u5c0f\u7684\uff1b\u5c11\u91cf\u7684\u3002a little bit \u8868\u793a\u201c\u6709\u4e00\u70b9\u201d\u3002",
+    example: "This is a little bit different."
   },
-  captions: {
-    phonetic: "/kap-shuhnz/",
-    type: "名词",
-    definition: "字幕；视频中用来表示对白或说明的文字。",
-    example: "Captions help learners follow spoken English."
+  different: {
+    phonetic: "/dif-er-uhnt/",
+    type: "\u5f62\u5bb9\u8bcd",
+    definition: "\u4e0d\u540c\u7684\uff1b\u548c\u4e4b\u524d\u7684\u5185\u5bb9\u3001\u98ce\u683c\u6216\u60c5\u51b5\u4e0d\u4e00\u6837\u3002",
+    example: "Today's video is going to be a little bit different."
   },
-  realize: {
-    phonetic: "/ree-uh-lyz/",
-    type: "动词",
-    definition: "意识到；认识到某个事实或情况。",
-    example: "I didn't realize how fast the speaker was talking."
+  style: {
+    phonetic: "/style/",
+    type: "\u540d\u8bcd",
+    definition: "\u98ce\u683c\uff1b\u505a\u4e8b\u6216\u8868\u8fbe\u7684\u65b9\u5f0f\u3002",
+    example: "I am filming this in my old style."
   },
-  relied: {
-    phonetic: "/ri-lyd/",
-    type: "动词",
-    definition: "依赖；依靠。原形是 rely。",
-    example: "I relied on subtitles to understand every sentence."
+  comments: {
+    phonetic: "/kom-ents/",
+    type: "\u540d\u8bcd",
+    definition: "\u8bc4\u8bba\uff1b\u89c6\u9891\u6216\u6587\u7ae0\u4e0b\u65b9\u7684\u7559\u8a00\u3002",
+    example: "Let me know in the comments."
   },
-  subtitles: {
-    phonetic: "/sub-ty-tuhlz/",
-    type: "名词",
-    definition: "字幕；屏幕上显示的、对应或翻译语音内容的文字。",
-    example: "I relied on subtitles to understand every sentence."
+  naturally: {
+    phonetic: "/nach-er-uh-lee/",
+    type: "\u526f\u8bcd",
+    definition: "\u81ea\u7136\u5730\uff1b\u4e0d\u751f\u786c\u5730\u3002",
+    example: "I'll be describing everything naturally in English."
   },
-  jump: {
-    phonetic: "/juhmp/",
-    type: "动词",
-    definition: "跳转；从一个位置快速移动到另一个位置。",
-    example: "Now I can jump sentence by sentence."
-  },
-  sentence: {
-    phonetic: "/sen-tuhns/",
-    type: "名词",
-    definition: "句子；表达完整意思的一组词。",
-    example: "Practice one sentence at a time."
-  },
-  deepseek: {
-    phonetic: "/deep seek/",
-    type: "专有名词",
-    definition: "可用于翻译优化、学习讲解和笔记生成的大模型供应商。",
-    example: "DeepSeek helps polish the translation and notes."
-  },
-  polish: {
-    phonetic: "/pol-ish/",
-    type: "动词",
-    definition: "润色；让表达更清晰、更自然。",
-    example: "The model can polish a rough translation."
-  },
-  translation: {
-    phonetic: "/trans-lay-shuhn/",
-    type: "名词",
-    definition: "翻译；从一种语言转换成另一种语言的文本。",
-    example: "The translation keeps the meaning natural."
+  vocabulary: {
+    phonetic: "/voh-kab-yuh-lair-ee/",
+    type: "\u540d\u8bcd",
+    definition: "\u8bcd\u6c47\uff1b\u4e00\u95e8\u8bed\u8a00\u6216\u67d0\u4e2a\u4e3b\u9898\u4e2d\u7684\u5355\u8bcd\u3002",
+    example: "You'll also learn useful phrases and vocabulary."
   }
 }
 
 const fallbackWord = {
   phonetic: "/.../",
-  type: "单词",
-  definition: "AI 可以根据上下文生成音标、词性、释义和用法说明。",
+  type: "\u5355\u8bcd",
+  definition: "AI \u53ef\u4ee5\u6839\u636e\u5f53\u524d\u5b57\u5e55\u4e0a\u4e0b\u6587\u751f\u6210\u97f3\u6807\u3001\u8bcd\u6027\u3001\u91ca\u4e49\u548c\u7528\u6cd5\u8bf4\u660e\u3002",
   example: "Clicking a word opens a focused vocabulary panel."
 }
 
@@ -114,17 +105,25 @@ function normalizeWord(token) {
   return token.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/g, "")
 }
 
+function getActiveCaptionRow() {
+  return document.querySelector(".caption-row.active") || captionRows[0]
+}
+
 function setPlaybackPaused(paused) {
   playButton?.classList.toggle("paused", paused)
   if (playButton) {
-    playButton.textContent = paused ? "II" : "▶"
+    playButton.textContent = paused ? "II" : "\u25b6"
   }
   if (playbackState) {
-    playbackState.textContent = paused ? "悬浮单词，视频已暂停" : "00:18 / 01:02"
+    playbackState.textContent = paused ? "\u60ac\u6d6e\u5355\u8bcd\uff0c\u89c6\u9891\u5df2\u6682\u505c" : "00:04"
   }
 }
 
 function updateWordDetail(rawWord) {
+  if (!wordTitle || !wordPhonetic || !wordType || !wordDefinition || !wordExample) {
+    return
+  }
+
   const normalized = normalizeWord(rawWord)
   const detail = wordDictionary[normalized] || fallbackWord
   const cleanWord = rawWord.replace(/^[^a-zA-Z]+|[^a-zA-Z]+$/g, "")
@@ -182,10 +181,6 @@ function renderPlainText(container, text) {
   container.textContent = text
 }
 
-function getActiveCaptionRow() {
-  return document.querySelector(".caption-row.active") || captionRows[0]
-}
-
 function updateCaptionRowsForMode() {
   captionRows.forEach((row) => {
     const english = row.querySelector("strong")
@@ -201,40 +196,45 @@ function updateCaptionRowsForMode() {
 }
 
 function updateCurrentCaption(row = getActiveCaptionRow()) {
-  if (!row) {
+  if (!row || !focusTime) {
     return
   }
 
-  const englishText = row.dataset.text
-  const chineseText = row.dataset.translation
+  const englishText = row.dataset.text || ""
+  const chineseText = row.dataset.translation || ""
 
-  focusTime.textContent = row.dataset.time
+  focusTime.textContent = row.dataset.time || ""
 
   if (captionMode === "english") {
     renderInteractiveText(focusText, englishText)
-    focusTranslation.hidden = true
-    videoCaptionTranslation.hidden = true
-    renderInteractiveText(videoCaptionText, englishText)
-    wordPanel.hidden = false
+    if (focusTranslation) {
+      focusTranslation.hidden = true
+    }
+    if (wordPanel) {
+      wordPanel.hidden = false
+    }
     return
   }
 
   if (captionMode === "chinese") {
     renderPlainText(focusText, chineseText)
-    focusTranslation.hidden = true
-    videoCaptionTranslation.hidden = true
-    renderPlainText(videoCaptionText, chineseText)
-    wordPanel.hidden = true
+    if (focusTranslation) {
+      focusTranslation.hidden = true
+    }
+    if (wordPanel) {
+      wordPanel.hidden = true
+    }
     return
   }
 
   renderInteractiveText(focusText, englishText)
-  focusTranslation.hidden = false
-  focusTranslation.textContent = chineseText
-  renderInteractiveText(videoCaptionText, englishText)
-  videoCaptionTranslation.hidden = false
-  videoCaptionTranslation.textContent = chineseText
-  wordPanel.hidden = false
+  if (focusTranslation) {
+    focusTranslation.hidden = false
+    focusTranslation.textContent = chineseText
+  }
+  if (wordPanel) {
+    wordPanel.hidden = false
+  }
 }
 
 function setCaptionMode(mode) {
@@ -244,6 +244,33 @@ function setCaptionMode(mode) {
   })
   updateCaptionRowsForMode()
   updateCurrentCaption()
+}
+
+function enterLearningMode() {
+  if (entryState) {
+    entryState.hidden = true
+  }
+  if (learningState) {
+    learningState.hidden = false
+  }
+  if (extensionMenu) {
+    extensionMenu.hidden = true
+  }
+  updateCaptionRowsForMode()
+  updateCurrentCaption()
+  updateWordDetail("different")
+}
+
+function exitLearningMode() {
+  if (entryState) {
+    entryState.hidden = false
+  }
+  if (learningState) {
+    learningState.hidden = true
+  }
+  if (extensionMenu) {
+    extensionMenu.hidden = true
+  }
 }
 
 navItems.forEach((item) => {
@@ -270,11 +297,26 @@ modeButtons.forEach((button) => {
   button.addEventListener("click", () => setCaptionMode(button.dataset.captionMode))
 })
 
+toolbarButton?.addEventListener("click", () => {
+  if (extensionMenu) {
+    extensionMenu.hidden = !extensionMenu.hidden
+  }
+})
+
+enterLearningButton?.addEventListener("click", enterLearningMode)
+topEnterLearningButton?.addEventListener("click", enterLearningMode)
+exitLearningButton?.addEventListener("click", exitLearningMode)
+resetButton?.addEventListener("click", exitLearningMode)
+
 providerSelect?.addEventListener("change", () => {
   const provider = providerSelect.value
-  modelInput.value = providerDefaultModels[provider] || ""
+  if (modelInput) {
+    modelInput.value = providerDefaultModels[provider] || ""
+  }
   routeProviders.forEach((node) => {
-    node.textContent = provider
+    if (node) {
+      node.textContent = provider
+    }
   })
 })
 
@@ -288,4 +330,4 @@ soundButton?.addEventListener("click", () => {
 
 updateCaptionRowsForMode()
 updateCurrentCaption()
-updateWordDetail("subtitles")
+updateWordDetail("different")
