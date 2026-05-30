@@ -11,7 +11,7 @@
 
 ## 当前原型覆盖
 
-1. CaptionCue - 幕听的产品结构：Plasmo + TypeScript + React + Zustand。
+1. CaptionCue - 幕听的产品结构：Plasmo + TypeScript + React + Zustand + Tailwind CSS。
 2. 抖音 `https://www.douyin.com/*` 页面适配逻辑。
 3. 无字幕时音频提取、AI 转写、WebVTT 应用流程。
 4. DeepSeek 等指定大模型配置和任务路由。

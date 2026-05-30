@@ -12,9 +12,10 @@
 2. TypeScript：核心逻辑、数据模型、扩展消息协议。
 3. React：Popup、Side Panel、页面浮层和设置页 UI。
 4. Zustand：前端状态管理，维护字幕、播放、AI 任务和学习状态。
+5. Tailwind CSS：React UI 的样式系统，负责快速构建响应式布局、状态样式和主题化界面。
 
 ## 2. 目标用户场景
-
+  
 1. 用户在抖音、YouTube、Bilibili、Coursera、Udemy 或其他网页观看英文视频。
 2. 插件检测到页面中的视频元素，尝试读取原始字幕轨道。
 3. 如果页面已有字幕，插件解析字幕并生成按句切分的字幕列表。
@@ -32,6 +33,7 @@
    - Content Script：Plasmo content script 注入到视频页面，负责识别视频、读取字幕、控制播放、挂载学习面板。
    - Side Panel 或 Floating Panel：React 实现主要学习界面，展示字幕、翻译、AI 解释和控制按钮。
    - Options Page：React 实现，配置 AI 服务、快捷键、字幕显示偏好、隐私设置。
+   - Tailwind CSS：用于组件级样式、暗色学习模式、响应式布局和常用交互状态。
 
 2. 页面适配层
    - 统一封装不同网站的视频识别逻辑。
@@ -779,9 +781,10 @@ pending
 2. Manifest V3。
 3. TypeScript。
 4. React 构建 Popup、Side Panel、Options Page 和页面浮层。
-5. Zustand 管理 React UI 状态和学习状态。
-6. Plasmo Content Script 控制 video 和页面字幕。
-7. Background Service Worker 管理 AI 任务、缓存和消息。
+5. Tailwind CSS 构建 UI 样式、暗色主题和响应式布局。
+6. Zustand 管理 React UI 状态和学习状态。
+7. Plasmo Content Script 控制 video 和页面字幕。
+8. Background Service Worker 管理 AI 任务、缓存和消息。
 
 建议目录结构：
 
@@ -823,6 +826,9 @@ src/
   popup.tsx
   sidepanel.tsx
   options.tsx
+  style.css
+tailwind.config.js
+postcss.config.js
 ```
 
 字幕处理：

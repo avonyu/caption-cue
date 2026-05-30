@@ -29,6 +29,7 @@ CaptionCue - 幕听 helps learners turn online videos into interactive English-l
 - TypeScript
 - React
 - Zustand
+- Tailwind CSS
 
 ## Prototype
 

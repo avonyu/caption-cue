@@ -246,7 +246,7 @@ function setCaptionMode(mode) {
   updateCurrentCaption()
 }
 
-function enterLearningMode() {
+function enterMainPanel() {
   if (entryState) {
     entryState.hidden = true
   }
@@ -261,7 +261,7 @@ function enterLearningMode() {
   updateWordDetail("different")
 }
 
-function exitLearningMode() {
+function exitMainPanel() {
   if (entryState) {
     entryState.hidden = false
   }
@@ -303,10 +303,10 @@ toolbarButton?.addEventListener("click", () => {
   }
 })
 
-enterLearningButton?.addEventListener("click", enterLearningMode)
-topEnterLearningButton?.addEventListener("click", enterLearningMode)
-exitLearningButton?.addEventListener("click", exitLearningMode)
-resetButton?.addEventListener("click", exitLearningMode)
+enterLearningButton?.addEventListener("click", enterMainPanel)
+topEnterLearningButton?.addEventListener("click", enterMainPanel)
+exitLearningButton?.addEventListener("click", exitMainPanel)
+resetButton?.addEventListener("click", exitMainPanel)
 
 providerSelect?.addEventListener("change", () => {
   const provider = providerSelect.value
